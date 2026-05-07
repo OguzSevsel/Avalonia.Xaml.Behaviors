@@ -21,11 +21,13 @@ public class ChangePropertyAction : AvaloniaObject, IAction
     {
         return
             AppDomain.CurrentDomain.GetAssemblies()
+            .AsEnumerable()
                 .Reverse()
                 .Select(assembly => assembly.GetType(name))
                 .FirstOrDefault(t => t is not null)
             ??
             AppDomain.CurrentDomain.GetAssemblies()
+            .AsEnumerable()
                 .Reverse()
                 .SelectMany(assembly => assembly.GetTypes())
                 .FirstOrDefault(t => t.Name == name);
